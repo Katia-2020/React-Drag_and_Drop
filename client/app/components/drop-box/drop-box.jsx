@@ -12,7 +12,7 @@ const DropBox = (props) => {
   };
 
   return (
-    <div className={styles['drop-box']} onDragOver="false" onDrop={handleOnDrop}>
+    <div className={styles['drop-box']} onDragOver="return false" onDrop={handleOnDrop}>
       <Row direction="row">
         <Column>
           <Text
