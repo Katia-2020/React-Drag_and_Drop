@@ -15,6 +15,10 @@ const DropBox = (props) => {
     onClick();
   };
 
+  const handleInputClick = () => {
+    onClick();
+  };
+
   return (
     <div className={styles['drop-box']} onDragOver="return false" onDrop={handleOnDrop}>
       <Row direction="row">
@@ -27,6 +31,11 @@ const DropBox = (props) => {
           />
         </Column>
         <Column>
+          <input
+            type="file"
+            className={styles['input']}
+            onClick={handleInputClick}
+          />
           <Text
             text="browse"
             color="blue"
