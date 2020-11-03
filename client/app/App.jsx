@@ -44,13 +44,13 @@ class App extends React.Component {
           {files.map((file, index) => {
             const { name, type, done } = file;
             return (
-              <Row direction="row" key={index} color="blue" bold>
+              <Row direction="row" key={index}>
                 <Column shrink>
                   <Icon icon={type} theme={type} />
                 </Column>
 
                 <Column grow>
-                  <Text text={name} color={done ? 'blue' : 'grey'} />
+                  <Text text={name} color={done ? 'blue' : 'grey'} bold={done} />
                 </Column>
 
                 <Column shrink>
@@ -62,7 +62,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          <DropBox className={styles['drop-drag__footer']}/>
+          <DropBox className={styles['drop-drag__footer']} />
         </div>
 
       </div>
