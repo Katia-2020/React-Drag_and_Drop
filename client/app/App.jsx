@@ -3,6 +3,7 @@ import { Row, Column } from './components/grid';
 import Icon from './components/icon';
 import Text from './components/text';
 import Button from './components/button';
+import DropBox from './components/drop-box';
 import styles from './reset.scss';
 
 const files = [
@@ -61,11 +62,12 @@ class App extends React.Component {
         </div>
 
         <div>
+          <DropBox />
         </div>
 
       </div>
 
-    )
+    );
   }
 }
 
