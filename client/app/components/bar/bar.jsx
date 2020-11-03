@@ -1,5 +1,8 @@
 import React from 'react';
+import classnames from 'classnames/bind';
 import styles from './bar.scss';
+
+const cx = classnames.bind(styles);
 
 const Bar = (props) => {
   const { theme, width, display } = props;
@@ -9,9 +12,15 @@ const Bar = (props) => {
   };
 
   return (
-    <div className={styles['bar-container']}>
+    <div className={cx('bar-container', {
+      [`bar-container--display-${display}`]: display,
+    })}
+    >
+
       <div
-        className={styles[`bar bar--${theme} bar--display-${display}`]}
+        className={cx('bar', {
+          [`bar--${theme}`]: theme,
+        })}
         style={barWidthStyles}
       />
     </div>
