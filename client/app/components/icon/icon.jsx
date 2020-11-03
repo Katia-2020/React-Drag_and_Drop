@@ -7,7 +7,6 @@ const cx = classnames.bind(styles);
 
 const Icon = (props) => {
   const { icon, theme } = props;
-
   const glyph = icons[icon];
 
   return (
@@ -15,7 +14,7 @@ const Icon = (props) => {
       className={cx('icon', {
         [`icon--theme-${theme}`]: theme,
       })}
-      dangerouslySetInnerHTML={{ __html: glyth }}
+      dangerouslySetInnerHTML={{ __html: glyph }}
     />
   );
 };
