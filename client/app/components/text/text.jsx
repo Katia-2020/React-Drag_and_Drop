@@ -11,6 +11,7 @@ const Text = (props) => {
     color,
     bold,
     margin,
+    cursor,
   } = props;
 
   return (
@@ -20,6 +21,7 @@ const Text = (props) => {
         [`text--color-${color}`]: color,
         [`text--${bold}`]: bold,
         [`text--margin-${margin}`]: margin,
+        [`text--cursor-${cursor}`]: cursor,
       })}
       >
         {text}
