@@ -54,7 +54,7 @@ class App extends React.Component {
                 </Column>
 
                 <Column shrink>
-                  <Button icon={done ? 'done' : 'cancel'} theme={type} />
+                  <Button icon={done ? 'done' : 'cancel'} theme={done ? 'green' : 'red'} />
                 </Column>
               </Row>
             );
