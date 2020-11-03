@@ -34,13 +34,21 @@ class App extends React.Component {
     };
 
     this.handleOnDrop = this.handleOnDrop.bind(this);
+    this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
   handleOnDrop() {
 
   }
 
+  handleButtonClick() {
+    this.setState({
+      isClicked: true,
+    });
+  }
+
   render() {
+    console.log(this.state)
     const { width } = this.state;
     return (
       <div className={styles['drop-drag']}>
@@ -72,7 +80,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          <DropBox className={styles['drop-drag__footer']} onDrop={this.handleOnDrop} />
+          <DropBox className={styles['drop-drag__footer']} onDrop={this.handleOnDrop} onClick={this.handleButtonClick} />
         </div>
 
       </div>
