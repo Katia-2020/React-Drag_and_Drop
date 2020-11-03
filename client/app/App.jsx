@@ -37,7 +37,7 @@ class App extends React.Component {
       <div className={styles['drop-drag']}>
 
         <div className={styles['drop-drag__header']}>
-          <Text text="upload" />
+          <Text text="Upload" size="medium" color="blue" bold="bold" />
         </div>
 
         <div className={styles['drop-drag__body']}>
