@@ -5,10 +5,14 @@ import { Row, Column } from '../grid';
 import styles from './drop-box.scss';
 
 const DropBox = (props) => {
-  const { onDrop } = props;
+  const { onDrop, onClick } = props;
 
   const handleOnDrop = () => {
     onDrop();
+  };
+
+  const handleButtonClick = () => {
+    onClick();
   };
 
   return (
@@ -30,6 +34,7 @@ const DropBox = (props) => {
             bold="bold"
             margin="left"
             cursor="pointer"
+            onClick={handleButtonClick}
           />
         </Column>
 
