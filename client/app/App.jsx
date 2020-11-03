@@ -28,9 +28,16 @@ const files = [
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       width: 40,
-    }
+    };
+
+    this.handleOnDrop = this.handleOnDrop.bind(this);
+  }
+
+  handleOnDrop() {
+
   }
 
   render() {
@@ -65,7 +72,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          <DropBox className={styles['drop-drag__footer']} />
+          <DropBox className={styles['drop-drag__footer']} onDrop={this.handleOnDrop} />
         </div>
 
       </div>
