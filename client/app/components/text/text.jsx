@@ -16,7 +16,7 @@ const Text = (props) => {
     <div>
       <span className={cx('text', {
         [`text--${size}`]: size,
-        [`text--${color}`]: color,
+        [`text--color-${color}`]: color,
         [`text--${bold}`]: bold,
       })}
       >
