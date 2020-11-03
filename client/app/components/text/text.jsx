@@ -10,6 +10,7 @@ const Text = (props) => {
     size,
     color,
     bold,
+    margin,
   } = props;
 
   return (
@@ -18,6 +19,7 @@ const Text = (props) => {
         [`text--${size}`]: size,
         [`text--color-${color}`]: color,
         [`text--${bold}`]: bold,
+        [`text--margin-${margin}`]: margin,
       })}
       >
         {text}
