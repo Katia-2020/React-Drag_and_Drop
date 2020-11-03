@@ -1,8 +1,8 @@
 import React from 'react';
-import './components/reset.scss';
+import './reset.scss';
 
 const App = () => (
-
+  <div />
 );
 
 export default App;
