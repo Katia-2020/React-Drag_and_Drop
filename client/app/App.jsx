@@ -48,7 +48,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state)
+    console.log(this.state);
     const { width } = this.state;
     return (
       <div className={styles['drop-drag']}>
