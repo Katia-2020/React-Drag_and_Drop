@@ -10,10 +10,20 @@ body {
   background-color: rgb(207, 213, 225);
 }
 
-.drop-drag-container {
+.drop-drag {
   margin: 50px auto;
   width: 500px;
   padding: 20px;
   background-color: rgb(255, 255, 255);
   border-radius: 15px;
+
+  >:not(:last-of-type) {
+    margin-bottom: 20px;
+  }
+
+  &__body {
+    >:not(:last-of-type) {
+      margin-bottom: 20px;
+    }
+  }
 }

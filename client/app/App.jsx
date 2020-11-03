@@ -34,13 +34,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className={styles['drop-drag-container']}>
+      <div className={styles['drop-drag']}>
 
-        <div>
+        <div className={styles['drop-drag__header']}>
           <Text text="upload" />
         </div>
 
-        <div>
+        <div className={styles['drop-drag__body']}>
           {files.map((file, index) => {
             const { name, type, done } = file;
             return (
@@ -62,7 +62,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          <DropBox />
+          <DropBox className={styles['drop-drag__footer']}/>
         </div>
 
       </div>
