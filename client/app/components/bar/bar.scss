@@ -1,0 +1,17 @@
+.bar {
+  height: 100%;
+  position: absolute;
+  left: 0;
+
+  &--orange {
+    background-color: rgb(253, 173, 45);
+  }
+
+  &--blue {
+    background-color: rgb(78, 128, 231);
+  }
+
+  &--pink {
+    background-color: rgb(241, 8, 120);
+  }
+}
