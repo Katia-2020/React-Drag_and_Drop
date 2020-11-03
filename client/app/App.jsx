@@ -29,11 +29,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      width: 40,
     }
   }
 
   render() {
+    const { width } = this.state;
     return (
       <div className={styles['drop-drag']}>
 
@@ -52,7 +53,7 @@ class App extends React.Component {
 
                 <Column grow>
                   <Text text={name} color={done ? 'blue' : 'grey'} bold={done} />
-                  <Bar theme={type} width={40} display={done ? 'none' : 'block'} />
+                  <Bar theme={type} width={width} display={done ? 'none' : 'block'} />
                 </Column>
 
                 <Column shrink>
