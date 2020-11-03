@@ -22,6 +22,7 @@ const DropBox = () => (
           size="small"
           bold="bold"
           margin="left"
+          cursor="pointer"
         />
       </Column>
 
