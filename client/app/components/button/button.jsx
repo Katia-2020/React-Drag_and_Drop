@@ -15,9 +15,9 @@ const Button = (props) => {
       className={cx('button', {
         [`button--theme-${theme}`]: theme,
       })}
-      dangerouslySetInnerHTML={{ __html: glyph}}
+      dangerouslySetInnerHTML={{ __html: glyph }}
     />
   );
-}
+};
 
 export default Button;
