@@ -12,17 +12,24 @@ const Text = (props) => {
     bold,
     margin,
     cursor,
+    onClick,
   } = props;
+
+  const handleButtonClick = () => {
+    onClick();
+  };
 
   return (
     <div>
-      <span className={cx('text', {
-        [`text--${size}`]: size,
-        [`text--color-${color}`]: color,
-        [`text--${bold}`]: bold,
-        [`text--margin-${margin}`]: margin,
-        [`text--cursor-${cursor}`]: cursor,
-      })}
+      <span
+        onClick={handleButtonClick}
+        className={cx('text', {
+          [`text--${size}`]: size,
+          [`text--color-${color}`]: color,
+          [`text--${bold}`]: bold,
+          [`text--margin-${margin}`]: margin,
+          [`text--cursor-${cursor}`]: cursor,
+        })}
       >
         {text}
       </span>
