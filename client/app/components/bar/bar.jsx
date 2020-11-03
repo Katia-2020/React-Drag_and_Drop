@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './bar.scss';
 
 const Bar = (props) => {
-  const { theme, width } = props;
+  const { theme, width, display } = props;
 
   const barWidthStyles = {
     width: `${width}%`,
@@ -11,7 +11,7 @@ const Bar = (props) => {
   return (
     <div className={styles['bar-container']}>
       <div
-        className={styles[`bar bar--${theme}`]}
+        className={styles[`bar bar--${theme} bar--display-${display}`]}
         style={barWidthStyles}
       />
     </div>
