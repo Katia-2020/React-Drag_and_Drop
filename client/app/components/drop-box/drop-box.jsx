@@ -11,14 +11,14 @@ const DropBox = () => (
         <Text
           text="Drag files here or"
           color="grey"
-          size="medium"
+          size="small"
         />
       </Column>
       <Column>
         <Text
           text="browse"
           color="blue"
-          size="medium"
+          size="small"
           bold="bold"
         />
       </Column>
