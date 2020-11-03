@@ -41,10 +41,10 @@ class App extends React.Component {
         </div>
 
         <div>
-          {files.map((file) => {
+          {files.map((file, index) => {
             const { name, type, done } = file;
             return (
-              <Row direction="row">
+              <Row direction="row" key={index} color="blue" bold>
                 <Column shrink>
                   <Icon icon={type} theme={type} />
                 </Column>
