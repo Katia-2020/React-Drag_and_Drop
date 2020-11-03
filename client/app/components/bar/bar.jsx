@@ -9,10 +9,12 @@ const Bar = (props) => {
   };
 
   return (
-    <div
-      className={styles[`bar bar--${theme}`]}
-      style={barWidthStyles}
-    />
+    <div className={styles['bar-container']}>
+      <div
+        className={styles[`bar bar--${theme}`]}
+        style={barWidthStyles}
+      />
+    </div>
   );
 };
 
