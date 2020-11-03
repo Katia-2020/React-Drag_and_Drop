@@ -6,12 +6,11 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.values-field {
-  margin: 10px 25px 10px 0;
-  padding: 10px;
-  box-shadow: 2px 1px 10px rgba(29, 137, 232, 0.5);
-  color: rgb(4, 38, 68);
-  font-weight: bold;
+body {
+  background-color: rgb(207, 213, 225);
 }
 
-
+.drop-drag-container {
+  margin: auto;
+  padding: 15px;
+}
