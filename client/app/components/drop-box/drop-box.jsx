@@ -4,9 +4,11 @@ import { Row, Column } from '../grid';
 
 import styles from './drop-box.scss';
 
-const DropBox = () => {
+const DropBox = (props) => {
+  const { onDrop } = props;
+
   const handleOnDrop = () => {
-    ondrop();
+    onDrop();
   };
 
   return (
