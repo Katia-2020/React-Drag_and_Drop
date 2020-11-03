@@ -4,6 +4,7 @@ import Icon from './components/icon';
 import Text from './components/text';
 import Button from './components/button';
 import DropBox from './components/drop-box';
+import Bar from './components/bar';
 import styles from './reset.scss';
 
 const files = [
@@ -51,6 +52,7 @@ class App extends React.Component {
 
                 <Column grow>
                   <Text text={name} color={done ? 'blue' : 'grey'} bold={done} />
+                  <Bar theme={type} width={40} display={done ? 'none' : 'block'} />
                 </Column>
 
                 <Column shrink>
