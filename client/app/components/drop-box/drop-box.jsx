@@ -12,6 +12,7 @@ const DropBox = () => (
           text="Drag files here or"
           color="grey"
           size="small"
+          bold="bold"
         />
       </Column>
       <Column>
@@ -20,6 +21,7 @@ const DropBox = () => (
           color="blue"
           size="small"
           bold="bold"
+          margin="left"
         />
       </Column>
 
