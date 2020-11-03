@@ -15,9 +15,11 @@ const DropBox = (props) => {
     onClick();
   };
 
-  const handleInputClick = () => {
-    onClick();
-  };
+  const fileInput = React.createRef();
+
+  // const handleInputClick = () => {
+  //   onClick();
+  // };
 
   return (
     <div className={styles['drop-box']} onDragOver="return false" onDrop={handleOnDrop}>
@@ -31,11 +33,12 @@ const DropBox = (props) => {
           />
         </Column>
         <Column>
-          <input
+          {/* <input
             type="file"
             className={styles['input']}
             onClick={handleInputClick}
-          />
+          /> */}
+          <input type="file" ref={fileInput} />
           <Text
             text="browse"
             color="blue"
