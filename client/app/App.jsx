@@ -7,19 +7,22 @@ import DropBox from './components/drop-box';
 import Bar from './components/bar';
 import styles from './reset.scss';
 
-const files = [
+const mockFiles = [
   {
-    name: 'website.adobe',
+    fullName: 'website.abobe',
+    name: 'website',
     type: 'adobe',
-    done: true,
+    done: false,
   },
   {
-    name: 'appdesign.pdf',
+    fullName: 'appdesign.pdf',
+    name: 'appdesign',
     type: 'pdf',
     done: false,
   },
   {
-    name: 'icon.jpeg',
+    fullName: 'icon.jpeg',
+    name: 'icon',
     type: 'jpeg',
     done: false,
   },
@@ -31,19 +34,30 @@ class App extends React.Component {
 
     this.state = {
       width: 40,
+      files: [],
     };
 
-    this.handleOnDrop = this.handleOnDrop.bind(this);
-    this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
 
-  handleOnDrop() {
+  // I want to select multiple files
+  // 1. I want to be able to manage what files I can upload based on the MIME type. (i.e. jpg only)
+  // 2. I want to see an error in the list (i.e. invalid file) if the files is not a valid file (see above)
 
-  }
+  // 3. DIFFICULT LEVEL: ASIAN. I want to be able to convert files into base64 (progress bar)
+  // - https://stackoverflow.com/questions/36280818/how-to-convert-file-to-base64-in-javascript
+  // - https://developer.mozilla.org/en-US/docs/Web/API/FileReader
 
-  handleButtonClick() {
+  // 4. DIFFICULT LEVEL: KIND OF ASIAN. I want to be able to remove files
+
+  handleOnChange(event) {
+    const { files } = this.state;
+    const filesArray = Object.values(event.target.files);
+
+    const newFiles = [files, filesArray].flat();
+
     this.setState({
-      isClicked: true,
+      files: newFiles,
     });
   }
 
@@ -58,7 +72,7 @@ class App extends React.Component {
         </div>
 
         <div className={styles['drop-drag__body']}>
-          {files.map((file, index) => {
+          {mockFiles.map((file, index) => {
             const { name, type, done } = file;
             return (
               <Row direction="row" key={index}>
@@ -80,7 +94,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          <DropBox className={styles['drop-drag__footer']} onDrop={this.handleOnDrop} onClick={this.handleButtonClick} />
+          <DropBox className={styles['drop-drag__footer']} onChange={this.handleOnChange} />
         </div>
 
       </div>
