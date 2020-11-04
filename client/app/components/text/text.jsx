@@ -12,17 +12,11 @@ const Text = (props) => {
     bold,
     margin,
     cursor,
-    onClick,
   } = props;
-
-  const handleButtonClick = () => {
-    onClick();
-  };
 
   return (
     <div>
       <span
-        onClick={handleButtonClick}
         className={cx('text', {
           [`text--${size}`]: size,
           [`text--color-${color}`]: color,
