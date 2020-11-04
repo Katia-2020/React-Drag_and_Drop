@@ -40,7 +40,7 @@ class App extends React.Component {
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
-  // I want to select multiple files
+  // I want to select multiple files -DONE
   // 1. I want to be able to manage what files I can upload based on the MIME type. (i.e. jpg only)
   // 2. I want to see an error in the list (i.e. invalid file) if the files is not a valid file (see above)
 
@@ -53,17 +53,23 @@ class App extends React.Component {
   handleOnChange(event) {
     const { files } = this.state;
     const filesArray = Object.values(event.target.files);
-
     const newFiles = [files, filesArray].flat();
+    const fileType = newFiles.map((item) => item.type).toString();
+    // console.log(fileType)
+    console.log(newFiles)
 
-    this.setState({
-      files: newFiles,
-    });
+    if (fileType === 'application/pdf' || fileType === '' || fileType === 'image/jpeg') {
+      this.setState({
+        files: newFiles,
+      });
+    } else {
+      alert(`the file ${newFiles[0].name} is not valid`);
+    }
   }
 
   render() {
     console.log(this.state);
-    const { width } = this.state;
+    const { width, files } = this.state;
     return (
       <div className={styles['drop-drag']}>
 
@@ -72,7 +78,7 @@ class App extends React.Component {
         </div>
 
         <div className={styles['drop-drag__body']}>
-          {mockFiles.map((file, index) => {
+          {files.map((file, index) => {
             const { name, type, done } = file;
             return (
               <Row direction="row" key={index}>
