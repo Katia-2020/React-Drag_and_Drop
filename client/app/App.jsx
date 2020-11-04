@@ -50,6 +50,28 @@ class App extends React.Component {
 
   // 4. DIFFICULT LEVEL: KIND OF ASIAN. I want to be able to remove files
 
+  getIconType() {
+    const { files } = this.state;
+    const newFilesArr = [...files];
+    const fileType = newFilesArr.map((item) => item.type);
+    const lastItemType = fileType[fileType.length - 1];
+    let iconType = '';
+
+    if (lastItemType === 'application/pdf') {
+      iconType = 'pdf';
+    }
+
+    if (lastItemType === 'image/jpeg') {
+      iconType = 'jpeg';
+    }
+
+    if (lastItemType === '') {
+      iconType = 'adobe';
+    }
+
+    return iconType;
+  }
+
   handleOnChange(event) {
     const { files } = this.state;
     const filesArray = Object.values(event.target.files);
@@ -70,6 +92,7 @@ class App extends React.Component {
 
   render() {
     console.log(this.state);
+    console.log(this.getIconType());
     const { width, files } = this.state;
     return (
       <div className={styles['drop-drag']}>
@@ -80,16 +103,16 @@ class App extends React.Component {
 
         <div className={styles['drop-drag__body']}>
           {files.map((file, index) => {
-            const { name, type, done } = file;
+            const { name, done } = file;
             return (
               <Row direction="row" key={index}>
                 <Column shrink>
-                  <Icon icon={type} theme={type} />
+                  <Icon icon={this.getIconType()} theme={this.getIconType()} />
                 </Column>
 
                 <Column grow>
                   <Text text={name} color={done ? 'blue' : 'grey'} bold={done} />
-                  <Bar theme={type} width={width} display={done ? 'none' : 'block'} />
+                  <Bar theme={this.getIconType()} width={width} display={done ? 'none' : 'block'} />
                 </Column>
 
                 <Column shrink>
