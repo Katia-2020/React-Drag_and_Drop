@@ -41,8 +41,8 @@ class App extends React.Component {
   }
 
   // I want to select multiple files -DONE
-  // 1. I want to be able to manage what files I can upload based on the MIME type. (i.e. jpg only)
-  // 2. I want to see an error in the list (i.e. invalid file) if the files is not a valid file (see above)
+  // 1. I want to be able to manage what files I can upload based on the MIME type. (i.e. jpg only) -DONE
+  // 2. I want to see an error in the list (i.e. invalid file) if the files is not a valid file (see above) -DONE
 
   // 3. DIFFICULT LEVEL: ASIAN. I want to be able to convert files into base64 (progress bar)
   // - https://stackoverflow.com/questions/36280818/how-to-convert-file-to-base64-in-javascript
@@ -54,16 +54,17 @@ class App extends React.Component {
     const { files } = this.state;
     const filesArray = Object.values(event.target.files);
     const newFiles = [files, filesArray].flat();
-    const fileType = newFiles.map((item) => item.type).toString();
-    // console.log(fileType)
-    console.log(newFiles)
+    const fileType = newFiles.map((item) => item.type);
+    const fileName = newFiles.map((item) => item.name);
+    const lastItemType = fileType[fileType.length - 1];
+    const lastItemName = fileName[fileName.length - 1];
 
-    if (fileType === 'application/pdf' || fileType === '' || fileType === 'image/jpeg') {
+    if (lastItemType === 'application/pdf' || lastItemType === '' || lastItemType === 'image/jpeg') {
       this.setState({
         files: newFiles,
       });
     } else {
-      alert(`the file ${newFiles[0].name} is not valid`);
+      alert(`the file ${lastItemName} is not a valid document`);
     }
   }
 
