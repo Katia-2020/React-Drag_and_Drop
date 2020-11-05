@@ -91,9 +91,10 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state);
-    console.log(this.getIconType());
+    // console.log(this.state);
+    // console.log(this.getIconType());
     const { width, files } = this.state;
+    const iconType = this.getIconType();
     return (
       <div className={styles['drop-drag']}>
 
@@ -107,12 +108,12 @@ class App extends React.Component {
             return (
               <Row direction="row" key={index}>
                 <Column shrink>
-                  <Icon icon={this.getIconType()} theme={this.getIconType()} />
+                  <Icon icon={iconType} theme={iconType} />
                 </Column>
 
                 <Column grow>
                   <Text text={name} color={done ? 'blue' : 'grey'} bold={done} />
-                  <Bar theme={this.getIconType()} width={width} display={done ? 'none' : 'block'} />
+                  <Bar theme={iconType} width={width} display={done ? 'none' : 'block'} />
                 </Column>
 
                 <Column shrink>
