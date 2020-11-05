@@ -50,22 +50,18 @@ class App extends React.Component {
 
   // 4. DIFFICULT LEVEL: KIND OF ASIAN. I want to be able to remove files
 
-  getIconType() {
-    const { files } = this.state;
-    const newFilesArr = [...files];
-    const fileType = newFilesArr.map((item) => item.type);
-    const lastItemType = fileType[fileType.length - 1];
+  getIconType(type) {
     let iconType = '';
 
-    if (lastItemType === 'application/pdf') {
+    if (type === 'application/pdf') {
       iconType = 'pdf';
     }
 
-    if (lastItemType === 'image/jpeg') {
+    if (type === 'image/jpeg') {
       iconType = 'jpeg';
     }
 
-    if (lastItemType === '') {
+    if (type === '') {
       iconType = 'adobe';
     }
 
@@ -91,10 +87,10 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log(this.state);
+    console.log(this.state);
     // console.log(this.getIconType());
     const { width, files } = this.state;
-    const iconType = this.getIconType();
+
     return (
       <div className={styles['drop-drag']}>
 
@@ -104,7 +100,8 @@ class App extends React.Component {
 
         <div className={styles['drop-drag__body']}>
           {files.map((file, index) => {
-            const { name, done } = file;
+            const { name, type, done } = file;
+            const iconType = this.getIconType(type);
             return (
               <Row direction="row" key={index}>
                 <Column shrink>
