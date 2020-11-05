@@ -13,7 +13,7 @@ const DropBox = (props) => {
 
   return (
     <div className={styles['drop-box']}>
-      <Row direction="row">
+      <Row direction="row" center>
         <Column>
           <Text
             text="Drag files here or"
@@ -25,10 +25,10 @@ const DropBox = (props) => {
         <Column>
           <label className={styles['drop-box__label']} htmlFor="choose-files">
             <input
-              type="file"
-              className={styles['input']}
-              name="choose-files"
               id="choose-files"
+              type="file"
+              name="choose-files"
+              className={styles['input']}
               onChange={handleOnChange}
               multiple
             />
