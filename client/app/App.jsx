@@ -7,26 +7,26 @@ import DropBox from './components/drop-box';
 import Bar from './components/bar';
 import styles from './reset.scss';
 
-const mockFiles = [
-  {
-    fullName: 'website.abobe',
-    name: 'website',
-    type: 'adobe',
-    done: false,
-  },
-  {
-    fullName: 'appdesign.pdf',
-    name: 'appdesign',
-    type: 'pdf',
-    done: false,
-  },
-  {
-    fullName: 'icon.jpeg',
-    name: 'icon',
-    type: 'jpeg',
-    done: false,
-  },
-];
+// const mockFiles = [
+//   {
+//     fullName: 'website.abobe',
+//     name: 'website',
+//     type: 'adobe',
+//     done: false,
+//   },
+//   {
+//     fullName: 'appdesign.pdf',
+//     name: 'appdesign',
+//     type: 'pdf',
+//     done: false,
+//   },
+//   {
+//     fullName: 'icon.jpeg',
+//     name: 'icon',
+//     type: 'jpeg',
+//     done: false,
+//   },
+// ];
 
 class App extends React.Component {
   constructor(props) {
@@ -41,8 +41,10 @@ class App extends React.Component {
   }
 
   // I want to select multiple files -DONE
-  // 1. I want to be able to manage what files I can upload based on the MIME type. (i.e. jpg only) -DONE
-  // 2. I want to see an error in the list (i.e. invalid file) if the files is not a valid file (see above) -DONE
+  // 1. I want to be able to manage what files
+  // I can upload based on the MIME type. (i.e. jpg only) -DONE
+  // 2. I want to see an error in the list
+  // (i.e. invalid file) if the files is not a valid file (see above) -DONE
 
   // 3. DIFFICULT LEVEL: ASIAN. I want to be able to convert files into base64 (progress bar)
   // - https://stackoverflow.com/questions/36280818/how-to-convert-file-to-base64-in-javascript
@@ -88,7 +90,6 @@ class App extends React.Component {
 
   render() {
     console.log(this.state);
-    // console.log(this.getIconType());
     const { width, files } = this.state;
 
     return (
