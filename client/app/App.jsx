@@ -112,12 +112,8 @@ class App extends React.Component {
 
   render() {
     console.log(this.state);
-<<<<<<< HEAD
     // console.log(this.getIconType());
     const { uploadProgress, files } = this.state;
-=======
-    const { width, files } = this.state;
->>>>>>> f693b1ebb1cdb7f6f3379277b76e533a0332754d
 
     return (
       <div className={styles['drop-drag']}>
