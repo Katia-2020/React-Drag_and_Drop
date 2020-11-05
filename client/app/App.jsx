@@ -7,34 +7,36 @@ import DropBox from './components/drop-box';
 import Bar from './components/bar';
 import styles from './reset.scss';
 
-const mockFiles = [
-  {
-    fullName: 'website.abobe',
-    name: 'website',
-    type: 'adobe',
-    done: false,
-  },
-  {
-    fullName: 'appdesign.pdf',
-    name: 'appdesign',
-    type: 'pdf',
-    done: false,
-  },
-  {
-    fullName: 'icon.jpeg',
-    name: 'icon',
-    type: 'jpeg',
-    done: false,
-  },
-];
+// const mockFiles = [
+//   {
+//     fullName: 'website.abobe',
+//     name: 'website',
+//     type: 'adobe',
+//     done: false,
+//   },
+//   {
+//     fullName: 'appdesign.pdf',
+//     name: 'appdesign',
+//     type: 'pdf',
+//     done: false,
+//   },
+//   {
+//     fullName: 'icon.jpeg',
+//     name: 'icon',
+//     type: 'jpeg',
+//     done: false,
+//   },
+// ];
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      width: 40,
       files: [],
+      uploading: false,
+      uploadProgress: 0,
+      successfullyUploaded: false,
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -68,18 +70,38 @@ class App extends React.Component {
     return iconType;
   }
 
+  getBase64(file) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+      const key = 'base64';
+      file[key] = reader.result;
+      const newArr = [...file];
+
+      this.setState({
+        files: newArr,
+      });
+    };
+
+    reader.onerror = (error) => {
+      console.log('Error: ', error);
+    };
+  }
+
   handleOnChange(event) {
     const { files } = this.state;
     const filesArray = Object.values(event.target.files);
     const newFiles = [files, filesArray].flat();
-    const fileType = newFiles.map((item) => item.type);
-    const fileName = newFiles.map((item) => item.name);
-    const lastItemType = fileType[fileType.length - 1];
-    const lastItemName = fileName[fileName.length - 1];
+    const lastObj = newFiles[newFiles.length - 1];
+    const lastItemType = lastObj.type;
+    const lastItemName = lastObj.name;
+    newFiles.map((obj) => this.getBase64(obj));
 
     if (lastItemType === 'application/pdf' || lastItemType === '' || lastItemType === 'image/jpeg') {
       this.setState({
         files: newFiles,
+        uploading: true,
       });
     } else {
       alert(`the file ${lastItemName} is not a valid document`);
@@ -89,7 +111,7 @@ class App extends React.Component {
   render() {
     console.log(this.state);
     // console.log(this.getIconType());
-    const { width, files } = this.state;
+    const { uploadProgress, files } = this.state;
 
     return (
       <div className={styles['drop-drag']}>
@@ -110,7 +132,7 @@ class App extends React.Component {
 
                 <Column grow>
                   <Text text={name} color={done ? 'blue' : 'grey'} bold={done} />
-                  <Bar theme={iconType} width={width} display={done ? 'none' : 'block'} />
+                  <Bar theme={iconType} width={uploadProgress} display={done ? 'none' : 'block'} />
                 </Column>
 
                 <Column shrink>
