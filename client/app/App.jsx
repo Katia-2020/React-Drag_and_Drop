@@ -21,6 +21,7 @@ class App extends React.Component {
 
   getIconType(type) {
     const wordExtension = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    const excelExtension = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
     let iconType = '';
 
     if (type === 'application/pdf') {
@@ -31,8 +32,8 @@ class App extends React.Component {
       iconType = 'jpeg';
     }
 
-    if (type === '') {
-      iconType = 'adobe';
+    if (type === excelExtension) {
+      iconType = 'excel';
     }
 
     if (type === wordExtension) {
@@ -45,8 +46,9 @@ class App extends React.Component {
   getSupportedFileStatus(item) {
     const { type } = item;
     const wordExtension = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    const excelExtension = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 
-    return !!(type === 'application/pdf' || type === '' || type === 'image/jpeg' || type === wordExtension);
+    return !!(type === 'application/pdf' || type === excelExtension || type === 'image/jpeg' || type === wordExtension);
   }
 
   extendFilesWithBase64(files) {
@@ -150,16 +152,13 @@ class App extends React.Component {
 
                   {supportedFile ? '' : 'sorry, this extension is not supported'}
 
-                  {
-                  loading ? (
+                  {loading ? (
                     <Spinner
                       theme={iconType}
                       numbers={['one', 'two', 'three']}
                       display={done ? 'none' : 'block'}
                     />
-                  )
-                    : ''
-                  }
+                  ) : ''}
 
                 </Column>
 
