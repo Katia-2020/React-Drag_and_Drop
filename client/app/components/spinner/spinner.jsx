@@ -14,19 +14,19 @@ const Spinner = (props) => {
     >
       <div
         className={cx('spinner', {
-          [`spiner--${theme}`]: theme,
+          [`spinner--${theme}`]: theme,
           [`spinner-${numbers[0]}`]: numbers,
         })}
       />
       <div
         className={cx('spinner', {
-          [`spiner--${theme}`]: theme,
+          [`spinner--${theme}`]: theme,
           [`spinner-${numbers[1]}`]: numbers,
         })}
       />
       <div
         className={cx('spinner', {
-          [`spiner--${theme}`]: theme,
+          [`spinner--${theme}`]: theme,
           [`spinner-${numbers[2]}`]: numbers,
         })}
       />
