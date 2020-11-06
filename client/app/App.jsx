@@ -20,6 +20,7 @@ class App extends React.Component {
   }
 
   getIconType(type) {
+    const wordExtension = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
     let iconType = '';
 
     if (type === 'application/pdf') {
@@ -34,13 +35,18 @@ class App extends React.Component {
       iconType = 'adobe';
     }
 
+    if (type === wordExtension) {
+      iconType = 'word';
+    }
+
     return iconType;
   }
 
   getSupportedFileStatus(item) {
     const { type } = item;
+    const wordExtension = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
 
-    return !!(type === 'application/pdf' || type === '' || type === 'image/jpeg');
+    return !!(type === 'application/pdf' || type === '' || type === 'image/jpeg' || type === wordExtension);
   }
 
   extendFilesWithBase64(files) {
@@ -99,12 +105,15 @@ class App extends React.Component {
       }));
 
     const newFiles = [files, filesArray].flat();
+    const delay = Math.floor(Math.random() * 7000) + 1;
 
     this.setState({
       files: newFiles,
     });
 
-    this.extendFilesWithBase64(newFiles);
+    window.setTimeout(() => {
+      this.extendFilesWithBase64(newFiles);
+    }, delay);
   }
 
   handleButtonClick() {
@@ -124,8 +133,10 @@ class App extends React.Component {
 
         <div className={styles['drop-drag__body']}>
           {files.map((file) => {
-            const { name, type, done } = file.data;
-            const { supportedFile } = file;
+            const { name, type } = file.data;
+            const { supportedFile, base64, done } = file;
+            const fileReady = done && supportedFile && base64;
+            const loading = supportedFile && !base64;
 
             const iconType = this.getIconType(type);
             return (
@@ -137,23 +148,25 @@ class App extends React.Component {
                 <Column grow>
                   <Text text={name} color={done ? 'blue' : 'grey'} bold={done} />
 
+                  {supportedFile ? '' : 'sorry, this extension is not supported'}
+
                   {
-                  supportedFile ? (
+                  loading ? (
                     <Spinner
                       theme={iconType}
                       numbers={['one', 'two', 'three']}
                       display={done ? 'none' : 'block'}
                     />
                   )
-                    : 'sorry, this extension is not supported'
+                    : ''
                   }
 
                 </Column>
 
                 <Column shrink>
                   <Button
-                    icon={done ? 'done' : 'cancel'}
-                    theme={done ? 'green' : 'red'}
+                    icon={fileReady ? 'done' : 'cancel'}
+                    theme={fileReady ? 'green' : 'red'}
                     onClick={this.handleButtonClick}
                   />
                 </Column>
