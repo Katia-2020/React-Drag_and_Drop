@@ -9,10 +9,10 @@ const Button = (props) => {
   const { icon, theme, onClick } = props;
 
   const glyph = icons[icon];
-  
+
   const handleButtonClick = () => {
     onClick();
-  }
+  };
 
   return (
     <div
