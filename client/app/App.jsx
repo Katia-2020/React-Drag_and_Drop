@@ -7,27 +7,6 @@ import DropBox from './components/drop-box';
 import Bar from './components/bar';
 import styles from './reset.scss';
 
-// const mockFiles = [
-//   {
-//     fullName: 'website.abobe',
-//     name: 'website',
-//     type: 'adobe',
-//     done: false,
-//   },
-//   {
-//     fullName: 'appdesign.pdf',
-//     name: 'appdesign',
-//     type: 'pdf',
-//     done: false,
-//   },
-//   {
-//     fullName: 'icon.jpeg',
-//     name: 'icon',
-//     type: 'jpeg',
-//     done: false,
-//   },
-// ];
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -42,18 +21,6 @@ class App extends React.Component {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }
-
-  // I want to select multiple files -DONE
-  // 1. I want to be able to manage what files
-  // I can upload based on the MIME type. (i.e. jpg only) -DONE
-  // 2. I want to see an error in the list
-  // (i.e. invalid file) if the files is not a valid file (see above) -DONE
-
-  // 3. DIFFICULT LEVEL: ASIAN. I want to be able to convert files into base64 (progress bar)
-  // - https://stackoverflow.com/questions/36280818/how-to-convert-file-to-base64-in-javascript
-  // - https://developer.mozilla.org/en-US/docs/Web/API/FileReader
-
-  // 4. DIFFICULT LEVEL: KIND OF ASIAN. I want to be able to remove files
 
   getIconType(type) {
     let iconType = '';
@@ -73,52 +40,77 @@ class App extends React.Component {
     return iconType;
   }
 
-  getBase64(file) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
+  extendFilesWithBase64(files) {
+    const newFiles = [...files];
 
-    reader.onload = () => {
-      const key = 'base64';
-      file[key] = reader.result;
-      const newArr = [...file];
+    newFiles.forEach(file => {
+      const reader = new FileReader();
 
-      this.setState({
-        files: newArr,
-      });
-    };
+      reader.readAsDataURL(file.data);
 
-    reader.onerror = (error) => {
-      console.log('Error: ', error);
-    };
+      reader.onload = () => {
+        const newFileObj = {
+          ...file,
+          base64: reader.result.split(',')[1],
+          done: true,
+        };
+
+        const foundFileIndex = files.findIndex((item) => item.id === newFileObj.id);
+
+        newFiles[foundFileIndex] = newFileObj;
+
+        this.setState({
+          files: newFiles,
+        });
+      };
+
+      reader.onerror = () => {
+        console.log('Error: ', error);
+      };
+    });
   }
+
+  // create a spinner component
+  // render the spinner component when the file is not converted yet
+  // fix the bugs (name, icon etc)
+  // when I am hovering the file item replace the tick icon with a remove button
+  // remove the file when I click on the delete button.
+  // show an error item if the file is not supported (check MIME type from props)
+  // have a read to web workers: https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers
+
+  // <InputFile types={['jpg', 'png']} />
+  // <InputFileItem done={done} name={name} extension={extension} />
+
+  // if (lastItemType === 'application/pdf' || lastItemType === '' || lastItemType === 'image/jpeg')
 
   handleOnChange(event) {
     const { files } = this.state;
-    const filesArray = Object.values(event.target.files);
-    const newFiles = [files, filesArray].flat();
-    const lastObj = newFiles[newFiles.length - 1];
-    const lastItemType = lastObj.type;
-    const lastItemName = lastObj.name;
-    newFiles.map((obj) => this.getBase64(obj));
 
-    if (lastItemType === 'application/pdf' || lastItemType === '' || lastItemType === 'image/jpeg') {
-      this.setState({
-        files: newFiles,
-        uploading: true,
-      });
-    } else {
-      alert(`the file ${lastItemName} is not a valid document`);
-    }
+    const filesArray = Object.values(event.target.files)
+      .map((item, index) => ({
+        id: files.length + index,
+        done: false,
+        supportedFile: this.getSupportedFileStatus(item);
+        base64: undefined,
+        data: item,
+      }));
+
+    const newFiles = [files, filesArray].flat();
+
+    this.setState({
+      files: newFiles,
+    });
+
+    this.extendFilesWithBase64(newFiles);
   }
 
   handleButtonClick() {
-    
+
   }
 
   render() {
     console.log(this.state);
-    // console.log(this.getIconType());
-    const { uploadProgress, files } = this.state;
+    const { files } = this.state;
 
     return (
       <div className={styles['drop-drag']}>
@@ -128,18 +120,19 @@ class App extends React.Component {
         </div>
 
         <div className={styles['drop-drag__body']}>
-          {files.map((file, index) => {
+          {files.map((file) => {
             const { name, type, done } = file;
             const iconType = this.getIconType(type);
             return (
-              <Row direction="row" key={index}>
+              <Row direction="row" key={file.id}>
                 <Column shrink>
                   <Icon icon={iconType} theme={iconType} />
                 </Column>
 
                 <Column grow>
                   <Text text={name} color={done ? 'blue' : 'grey'} bold={done} />
-                  <Bar theme={iconType} width={uploadProgress} display={done ? 'none' : 'block'} />
+                  {done ? 'done' : 'converting'}
+                  {/* <Bar theme={iconType} width={uploadProgress} display={done ? 'none' : 'block'} /> */}
                 </Column>
 
                 <Column shrink>
