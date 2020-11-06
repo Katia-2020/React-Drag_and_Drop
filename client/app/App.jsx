@@ -4,7 +4,7 @@ import Icon from './components/icon';
 import Text from './components/text';
 import Button from './components/button';
 import DropBox from './components/drop-box';
-import Bar from './components/bar';
+import Spinner from './components/spinner';
 import styles from './reset.scss';
 
 class App extends React.Component {
@@ -13,9 +13,6 @@ class App extends React.Component {
 
     this.state = {
       files: [],
-      uploading: false,
-      uploadProgress: 0,
-      successfullyUploaded: false,
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -38,6 +35,12 @@ class App extends React.Component {
     }
 
     return iconType;
+  }
+
+  getSupportedFileStatus(item) {
+    const { type } = item;
+
+    return !!(type === 'application/pdf' || type === '' || type === 'image/jpeg');
   }
 
   extendFilesWithBase64(files) {
@@ -90,7 +93,7 @@ class App extends React.Component {
       .map((item, index) => ({
         id: files.length + index,
         done: false,
-        // supportedFile: this.getSupportedFileStatus(item),
+        supportedFile: this.getSupportedFileStatus(item),
         base64: undefined,
         data: item,
       }));
@@ -121,7 +124,9 @@ class App extends React.Component {
 
         <div className={styles['drop-drag__body']}>
           {files.map((file) => {
-            const { name, type, done } = file;
+            const { name, type, done } = file.data;
+            const { supportedFile } = file;
+
             const iconType = this.getIconType(type);
             return (
               <Row direction="row" key={file.id}>
@@ -131,8 +136,18 @@ class App extends React.Component {
 
                 <Column grow>
                   <Text text={name} color={done ? 'blue' : 'grey'} bold={done} />
-                  {done ? 'done' : 'converting'}
-                  {/* <Bar theme={iconType} width={uploadProgress} display={done ? 'none' : 'block'} /> */}
+
+                  {
+                  supportedFile ? (
+                    <Spinner
+                      theme={iconType}
+                      numbers={['one', 'two', 'three']}
+                      display={done ? 'none' : 'block'}
+                    />
+                  )
+                    : 'sorry, this extension is not supported'
+                  }
+
                 </Column>
 
                 <Column shrink>
