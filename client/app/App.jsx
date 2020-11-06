@@ -40,6 +40,7 @@ class App extends React.Component {
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
   // I want to select multiple files -DONE
@@ -110,6 +111,10 @@ class App extends React.Component {
     }
   }
 
+  handleButtonClick() {
+    
+  }
+
   render() {
     console.log(this.state);
     // console.log(this.getIconType());
@@ -138,7 +143,11 @@ class App extends React.Component {
                 </Column>
 
                 <Column shrink>
-                  <Button icon={done ? 'done' : 'cancel'} theme={done ? 'green' : 'red'} />
+                  <Button
+                    icon={done ? 'done' : 'cancel'}
+                    theme={done ? 'green' : 'red'}
+                    onClick={this.handleButtonClick}
+                  />
                 </Column>
               </Row>
             );

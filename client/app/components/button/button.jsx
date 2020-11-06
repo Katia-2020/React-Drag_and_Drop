@@ -6,9 +6,13 @@ import styles from './button.scss';
 const cx = classnames.bind(styles);
 
 const Button = (props) => {
-  const { icon, theme } = props;
+  const { icon, theme, onClick } = props;
 
   const glyph = icons[icon];
+  
+  const handleButtonClick = () => {
+    onClick();
+  }
 
   return (
     <div
@@ -16,6 +20,7 @@ const Button = (props) => {
         [`button--theme-${theme}`]: theme,
       })}
       dangerouslySetInnerHTML={{ __html: glyph }}
+      onClick={handleButtonClick}
     />
   );
 };
