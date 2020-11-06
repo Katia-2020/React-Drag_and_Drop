@@ -90,7 +90,7 @@ class App extends React.Component {
       .map((item, index) => ({
         id: files.length + index,
         done: false,
-        supportedFile: this.getSupportedFileStatus(item);
+        // supportedFile: this.getSupportedFileStatus(item),
         base64: undefined,
         data: item,
       }));
