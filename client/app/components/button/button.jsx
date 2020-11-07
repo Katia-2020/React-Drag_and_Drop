@@ -6,12 +6,26 @@ import styles from './button.scss';
 const cx = classnames.bind(styles);
 
 const Button = (props) => {
-  const { icon, theme, onClick } = props;
+  const {
+    icon,
+    theme,
+    onClick,
+    onMouseEnter,
+    onMouseLeave,
+  } = props;
 
   const glyph = icons[icon];
 
   const handleButtonClick = () => {
     onClick();
+  };
+
+  const handleMouseEnter = () => {
+    onMouseEnter();
+  };
+
+  const handleMouseLeave = () => {
+    onMouseLeave();
   };
 
   return (
@@ -21,6 +35,8 @@ const Button = (props) => {
       })}
       dangerouslySetInnerHTML={{ __html: glyph }}
       onClick={handleButtonClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     />
   );
 };
