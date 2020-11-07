@@ -13,7 +13,7 @@ class App extends React.Component {
 
     this.state = {
       files: [],
-      mouseOver: false,
+      selectedIndex: '',
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -54,20 +54,22 @@ class App extends React.Component {
     return !!(type === 'application/pdf' || type === excelExtension || type === 'image/jpeg' || type === wordExtension);
   }
 
-  getTheRightStatusButton(index) {
-    const { mouseOver, files } = this.state;
-    const foundFileIndex = files.findIndex((item) => item.id === index);
-    const fileReady = files[foundFileIndex].done &&
-    files[foundFileIndex].supportedFile &&
-    files[foundFileIndex].base64;
+  getButtonType(file, index) {
+    const { selectedIndex } = this.state;
+    const fileReady = file.done &&
+      file.supportedFile &&
+      file.base64;
+
     let buttonType;
 
-    if ((fileReady && mouseOver) || !fileReady) {
-      buttonType = 'remove';
+    if (selectedIndex !== index && fileReady) {
+      buttonType = 'ready';
     }
 
-    if (fileReady && !mouseOver) {
-      buttonType = 'ready';
+    if ((selectedIndex === index && fileReady) ||
+        (selectedIndex === index && !fileReady) ||
+        (selectedIndex !== index && !fileReady)) {
+      buttonType = 'remove';
     }
 
     return buttonType;
@@ -144,20 +146,20 @@ class App extends React.Component {
 
   }
 
-  handleMouseEnter() {
+  handleMouseEnter(id) {
     this.setState({
-      mouseOver: true,
+      selectedIndex: id,
     });
   }
 
   handleMouseLeave() {
     this.setState({
-      mouseOver: false,
+      selectedIndex: '',
     });
   }
 
   render() {
-    // console.log(this.state);
+    console.log(this.state);
     const { files } = this.state;
 
     return (
@@ -173,7 +175,7 @@ class App extends React.Component {
             const { supportedFile, base64, done } = file;
             const loading = supportedFile && !base64;
             const iconType = this.getIconType(type);
-            const buttonType = this.getTheRightStatusButton(index);
+            const buttonType = this.getButtonType(file, index);
 
             return (
               <Row direction="row" key={file.id}>
@@ -198,6 +200,7 @@ class App extends React.Component {
 
                 <Column shrink>
                   <Button
+                    id={index}
                     icon={buttonType === 'remove' ? 'cancel' : 'done'}
                     theme={buttonType === 'remove' ? 'red' : 'green'}
                     onClick={this.handleButtonClick}
