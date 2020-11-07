@@ -7,6 +7,7 @@ const cx = classnames.bind(styles);
 
 const Button = (props) => {
   const {
+    id,
     icon,
     theme,
     onClick,
@@ -21,7 +22,7 @@ const Button = (props) => {
   };
 
   const handleMouseEnter = () => {
-    onMouseEnter();
+    onMouseEnter(id);
   };
 
   const handleMouseLeave = () => {
