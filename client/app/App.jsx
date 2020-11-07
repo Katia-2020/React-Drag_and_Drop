@@ -13,10 +13,13 @@ class App extends React.Component {
 
     this.state = {
       files: [],
+      mouseOver: false,
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
   getIconType(type) {
@@ -49,6 +52,25 @@ class App extends React.Component {
     const excelExtension = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 
     return !!(type === 'application/pdf' || type === excelExtension || type === 'image/jpeg' || type === wordExtension);
+  }
+
+  getTheRightStatusButton(index) {
+    const { mouseOver, files } = this.state;
+    const foundFileIndex = files.findIndex((item) => item.id === index);
+    const fileReady = files[foundFileIndex].done &&
+    files[foundFileIndex].supportedFile &&
+    files[foundFileIndex].base64;
+    let buttonType;
+
+    if ((fileReady && mouseOver) || !fileReady) {
+      buttonType = 'remove';
+    }
+
+    if (fileReady && !mouseOver) {
+      buttonType = 'ready';
+    }
+
+    return buttonType;
   }
 
   extendFilesWithBase64(files) {
@@ -122,8 +144,20 @@ class App extends React.Component {
 
   }
 
+  handleMouseEnter() {
+    this.setState({
+      mouseOver: true,
+    });
+  }
+
+  handleMouseLeave() {
+    this.setState({
+      mouseOver: false,
+    });
+  }
+
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     const { files } = this.state;
 
     return (
@@ -134,13 +168,13 @@ class App extends React.Component {
         </div>
 
         <div className={styles['drop-drag__body']}>
-          {files.map((file) => {
+          {files.map((file, index) => {
             const { name, type } = file.data;
             const { supportedFile, base64, done } = file;
-            const fileReady = done && supportedFile && base64;
             const loading = supportedFile && !base64;
-
             const iconType = this.getIconType(type);
+            const buttonType = this.getTheRightStatusButton(index);
+
             return (
               <Row direction="row" key={file.id}>
                 <Column shrink>
@@ -164,9 +198,11 @@ class App extends React.Component {
 
                 <Column shrink>
                   <Button
-                    icon={fileReady ? 'done' : 'cancel'}
-                    theme={fileReady ? 'green' : 'red'}
+                    icon={buttonType === 'remove' ? 'cancel' : 'done'}
+                    theme={buttonType === 'remove' ? 'red' : 'green'}
                     onClick={this.handleButtonClick}
+                    onMouseEnter={this.handleMouseEnter}
+                    onMouseLeave={this.handleMouseLeave}
                   />
                 </Column>
               </Row>
