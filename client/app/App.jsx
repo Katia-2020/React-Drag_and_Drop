@@ -108,15 +108,14 @@ class App extends React.Component {
   // create a spinner component - DONE
   // render the spinner component when the file is not converted yet - DONE
   // fix the bugs (name, icon etc) - DONE
-  // when I am hovering the file item replace the tick icon with a remove button
-  // remove the file when I click on the delete button.
+  // when I am hovering the file item replace the tick icon with a remove
+  // button - DONE
+  // remove the file when I click on the delete button. - DONE
   // show an error item if the file is not supported (check MIME type from props) - DONE
   // have a read to web workers: https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers
 
   // <InputFile types={['jpg', 'png']} />
   // <InputFileItem done={done} name={name} extension={extension} />
-
-  // if (lastItemType === 'application/pdf' || lastItemType === '' || lastItemType === 'image/jpeg')
 
   handleOnChange(event) {
     const { files } = this.state;
@@ -143,7 +142,13 @@ class App extends React.Component {
   }
 
   handleButtonClick() {
+    const { selectedIndex, files } = this.state;
+    const filesArray = [...files];
+    filesArray.splice(selectedIndex, 1);
 
+    this.setState({
+      files: filesArray,
+    });
   }
 
   handleMouseEnter(id) {
