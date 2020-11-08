@@ -25,7 +25,7 @@ class App extends React.Component {
   getIconType(type) {
     const wordExtension = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
     const excelExtension = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-    let iconType = '';
+    let iconType;
 
     if (type === 'application/pdf') {
       iconType = 'pdf';
@@ -172,7 +172,7 @@ class App extends React.Component {
             return (
               <Row direction="row" key={file.id}>
                 <Column shrink>
-                  <Icon icon={iconType} theme={iconType} />
+                  <Icon icon={supportedFile ? iconType : 'failure'} theme={supportedFile ? iconType : 'failure'} />
                 </Column>
 
                 <Column grow>
