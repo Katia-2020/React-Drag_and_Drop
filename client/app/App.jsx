@@ -176,18 +176,20 @@ class App extends React.Component {
                 </Column>
 
                 <Column grow>
-                  <Text text={name} color={done ? 'blue' : 'grey'} bold={done} />
+                  <div className={styles['text-container']}>
+                    <Text text={name} color={done ? 'blue' : 'grey'} bold={done} />
 
-                  {supportedFile ? '' : 'sorry, this extension is not supported'}
+                    {supportedFile ? '' : 'sorry, this extension is not supported'}
 
-                  {loading ? (
-                    <Spinner
-                      theme={iconType}
-                      numbers={['one', 'two', 'three']}
-                      display={done ? 'none' : 'block'}
-                    />
-                  ) : ''}
+                    {loading ? (
+                      <Spinner
+                        theme={iconType}
+                        numbers={['one', 'two', 'three']}
+                        display={done ? 'none' : 'block'}
+                      />
+                    ) : ''}
 
+                  </div>
                 </Column>
 
                 <Column shrink>
