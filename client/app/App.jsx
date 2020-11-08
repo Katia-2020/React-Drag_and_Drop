@@ -143,11 +143,11 @@ class App extends React.Component {
 
   handleButtonClick() {
     const { selectedIndex, files } = this.state;
-    const filesArray = [...files];
-    filesArray.splice(selectedIndex, 1);
+    const newFilesArray = [...files];
+    newFilesArray.splice(selectedIndex, 1);
 
     this.setState({
-      files: filesArray,
+      files: newFilesArray,
     });
   }
 
