@@ -13,11 +13,47 @@ class File extends React.Component {
 
     this.state = {
       hover: false,
+      fileObj: props.file,
     };
 
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
+  }
+
+  componentDidMount() {
+    const { fileObj } = this.state;
+
+    this.extendFilesWithBase64(fileObj);
+  }
+
+  extendFilesWithBase64(file) {
+    const { onGetBase64 } = this.props;
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file.data);
+
+    reader.onload = () => {
+      const delay = Math.floor(Math.random() * 7000) + 1;
+
+      window.setTimeout(() => {
+        const newFileObj = {
+          ...file,
+          base64: reader.result.split(',')[1],
+          done: true,
+        };
+
+        this.setState({
+          fileObj: newFileObj,
+        });
+      }, delay);
+    };
+
+    reader.onerror = () => {
+      console.log('Error: ', error);
+    };
+
+    onGetBase64(file);
   }
 
   handleButtonClick() {
@@ -39,13 +75,14 @@ class File extends React.Component {
   }
 
   render() {
-    const { file, supportedFile } = this.props;
-    const { hover } = this.state;
-    const { name, type } = file.data;
-    const { base64, done } = file;
+    const { supportedFile } = this.props;
+    const { hover, fileObj } = this.state;
+    const { base64, done, data } = fileObj;
+    const { name, type } = data;
     const isConverting = supportedFile && !base64;
     const fileIconTheme = getIconType(type);
-    const iconStatusProps = getStatusIconProps(file, supportedFile);
+    const iconStatusProps = getStatusIconProps(fileObj, supportedFile);
+    console.log(fileObj);
 
     return (
       <div
