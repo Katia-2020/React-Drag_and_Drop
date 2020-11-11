@@ -22,11 +22,11 @@ export const getIconType = (type) => {
   return iconType;
 };
 
-export const getStatusIconProps = (file, supportedFile) => {
+export const getStatusIconProps = (fileObj, supportedFile) => {
   const fileReady = (
-    file.done &&
+    fileObj.done &&
     supportedFile &&
-    file.base64
+    fileObj.base64
   );
 
   if (fileReady) {
