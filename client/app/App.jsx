@@ -10,44 +10,12 @@ class App extends React.Component {
 
     this.state = {
       files: [],
+      filesWithBase64: [],
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
-  }
-
-  extendFilesWithBase64(files) {
-    const newFiles = [...files];
-
-    newFiles.forEach(file => {
-      const reader = new FileReader();
-
-      reader.readAsDataURL(file.data);
-
-      reader.onload = () => {
-        const delay = Math.floor(Math.random() * 7000) + 1;
-
-        window.setTimeout(() => {
-          const newFileObj = {
-            ...file,
-            base64: reader.result.split(',')[1],
-            done: true,
-          };
-
-          const foundFileIndex = files.findIndex((item) => item.id === newFileObj.id);
-
-          newFiles[foundFileIndex] = newFileObj;
-
-          this.setState({
-            files: newFiles,
-          });
-        }, delay);
-      };
-
-      reader.onerror = () => {
-        console.log('Error: ', error);
-      };
-    });
+    this.extendFilesWithBase64 = this.extendFilesWithBase64.bind(this);
   }
 
   handleOnChange(event) {
@@ -66,8 +34,6 @@ class App extends React.Component {
     this.setState({
       files: newFiles,
     });
-
-    this.extendFilesWithBase64(newFiles);
   }
 
   handleButtonClick(id) {
@@ -81,7 +47,18 @@ class App extends React.Component {
     });
   }
 
+  extendFilesWithBase64(file) {
+    const { filesWithBase64 } = this.state;
+    const newFilesArrayWithBase64 = [...filesWithBase64];
+    newFilesArrayWithBase64.push(file);
+
+    this.setState({
+      filesWithBase64: newFilesArrayWithBase64,
+    });
+  }
+
   render() {
+    console.log(this.state);
     const { files } = this.state;
 
     return (
@@ -95,6 +72,7 @@ class App extends React.Component {
             types={['jpeg', 'word', 'excel', 'pdf']}
             files={files}
             onClick={this.handleButtonClick}
+            onGetBase64={this.extendFilesWithBase64}
           />
         </div>
 
