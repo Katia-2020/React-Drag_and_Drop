@@ -39,13 +39,13 @@ class File extends React.Component {
   }
 
   render() {
-    const { file } = this.props;
+    const { file, supportedFile } = this.props;
     const { hover } = this.state;
     const { name, type } = file.data;
-    const { supportedFile, base64, done } = file;
+    const { base64, done } = file;
     const isConverting = supportedFile && !base64;
     const fileIconTheme = getIconType(type);
-    const iconStatusProps = getStatusIconProps(file);
+    const iconStatusProps = getStatusIconProps(file, supportedFile);
 
     return (
       <div
