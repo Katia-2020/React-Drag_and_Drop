@@ -1,7 +1,7 @@
 import React from 'react';
 import Text from './components/text';
 import DropBox from './components/drop-box';
-import File from './components/file';
+import InputFiles from './components/inputFiles';
 import styles from './reset.scss';
 
 class App extends React.Component {
@@ -14,14 +14,6 @@ class App extends React.Component {
 
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
-  }
-
-  getSupportedFileStatus(item) {
-    const { type } = item;
-    const wordExtension = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-    const excelExtension = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-
-    return !!(type === 'application/pdf' || type === excelExtension || type === 'image/jpeg' || type === wordExtension);
   }
 
   extendFilesWithBase64(files) {
@@ -65,7 +57,6 @@ class App extends React.Component {
       .map((item, index) => ({
         id: files.length + index,
         done: false,
-        supportedFile: this.getSupportedFileStatus(item),
         base64: undefined,
         data: item,
       }));
@@ -100,9 +91,11 @@ class App extends React.Component {
         </div>
 
         <div className={styles['drop-drag__body']}>
-          {files.map((file) => (
-            <File file={file} onClick={this.handleButtonClick} />
-          ))}
+          <InputFiles
+            types={['jpeg', 'word', 'excel', 'pdf']}
+            files={files}
+            onClick={this.handleButtonClick}
+          />
         </div>
 
         <div className={styles['drop-drag__footer']}>
