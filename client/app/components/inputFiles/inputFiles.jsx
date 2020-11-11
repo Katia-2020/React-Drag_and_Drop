@@ -10,10 +10,14 @@ const mimeTypes = {
 };
 
 const InputFiles = (props) => {
-  const { types, files, onClick } = props;
+  const { types, files, onClick, onGetBase64 } = props;
 
   const handleButtonClick = (id) => {
     onClick(id);
+  };
+
+  const extendFilesWithBase64 = (file) => {
+    onGetBase64(file);
   };
 
   const isSupportedFile = (fileType) => types.includes(mimeTypes[fileType]);
@@ -28,6 +32,7 @@ const InputFiles = (props) => {
             file={file}
             onClick={handleButtonClick}
             supportedFile={isSupportedFile(fileType)}
+            onGetBase64={extendFilesWithBase64}
           />
         );
       })}
