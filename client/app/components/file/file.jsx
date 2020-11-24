@@ -100,7 +100,7 @@ class File extends React.Component {
 
           <Column grow>
             <div className={styles['text-container']}>
-              <Text text={name} color={done ? 'blue' : 'grey'} bold={done} />
+              <Text text={name} color={done && supportedFile ? 'blue' : 'grey'} bold={done} />
 
               {!supportedFile && (
                 <Text text="sorry, this extension is not supported" />
