@@ -10,7 +10,12 @@ const mimeTypes = {
 };
 
 const InputFiles = (props) => {
-  const { types, files, onClick, onGetBase64 } = props;
+  const {
+    types,
+    files,
+    onClick,
+    onGetBase64,
+  } = props;
 
   const handleButtonClick = (id) => {
     onClick(id);
