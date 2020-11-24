@@ -1,5 +1,6 @@
 import React from 'react';
 import Text from './components/text';
+import Header from './components/header';
 import DropBox from './components/drop-box';
 import InputFiles from './components/input-files';
 import mimeTypes from './components/input-files/input-files.utilities';
@@ -67,8 +68,7 @@ class App extends React.Component {
     return (
       <div className={styles['drop-drag']}>
         <div className={styles['drop-drag__header']}>
-          <Text text="Upload you files" size="medium" color="blue" bold="bold" />
-          <Text text={`File should be ${extensions}`} size="xsmall" color="light-grey" bold="light" />
+          <Header extensions={extensions} />
         </div>
 
         <div className={styles['drop-drag__box']}>
