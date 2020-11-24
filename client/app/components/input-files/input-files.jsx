@@ -1,6 +1,6 @@
 import React from 'react';
 import File from '../file';
-import styles from './inputFiles.scss';
+import styles from './input-files.scss';
 
 const mimeTypes = {
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'word',

@@ -1,7 +1,7 @@
 import React from 'react';
 import Text from './components/text';
 import DropBox from './components/drop-box';
-import InputFiles from './components/inputFiles';
+import InputFiles from './components/input-files';
 import styles from './reset.scss';
 
 class App extends React.Component {
