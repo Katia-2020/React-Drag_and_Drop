@@ -5,7 +5,7 @@ import Text from '../text';
 const Header = ({ extensions }) => (
   <div className={styles['drop-drag__header']}>
     <Text text="Upload you files" size="medium" color="blue" bold="bold" />
-    <Text text={`File should be ${extensions}`} size="xsmall" color="light-grey" bold="light" />
+    <Text text={`Files supported: ${extensions}`} size="xsmall" color="light-grey" bold="light" />
   </div>
 );
 

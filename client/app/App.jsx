@@ -1,5 +1,4 @@
 import React from 'react';
-import Text from './components/text';
 import Header from './components/header';
 import DropBox from './components/drop-box';
 import InputFiles from './components/input-files';
@@ -63,17 +62,11 @@ class App extends React.Component {
     // console.log(this.state);
     const { files } = this.state;
     const extensions = (Object.values(mimeTypes)).join(', ');
-    console.log(extensions);
 
     return (
       <div className={styles['drop-drag']}>
-        <div className={styles['drop-drag__header']}>
-          <Header extensions={extensions} />
-        </div>
-
-        <div className={styles['drop-drag__box']}>
-          <DropBox onChange={this.handleOnChange} />
-        </div>
+        <Header extensions={extensions} />
+        <DropBox onChange={this.handleOnChange} />
 
         <div className={styles['drop-drag__body']}>
           <InputFiles
