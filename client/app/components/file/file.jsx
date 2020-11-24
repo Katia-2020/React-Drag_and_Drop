@@ -82,7 +82,6 @@ class File extends React.Component {
     const isConverting = supportedFile && !base64;
     const fileIconTheme = getIconType(type);
     const iconStatusProps = getStatusIconProps(fileObj, supportedFile);
-    console.log(fileObj);
 
     return (
       <div

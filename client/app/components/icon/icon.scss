@@ -37,9 +37,21 @@
     }
   }
 
+  &--theme-blue {
+    svg {
+      fill: rgb(0, 61, 184);
+    }
+  }
+
   &--size-small {
     svg {
       width: 17px;
+    }
+  }
+
+  &--size-medium {
+    svg {
+      width: 35px;
     }
   }
 

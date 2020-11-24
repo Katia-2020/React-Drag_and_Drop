@@ -1,6 +1,7 @@
 import React from 'react';
 import Text from '../text';
-import { Row } from '../grid';
+import { Row, Column } from '../grid';
+import Icon from '../icon';
 
 import styles from './drop-box.scss';
 
@@ -22,20 +23,29 @@ const DropBox = (props) => {
           onChange={handleOnChange}
           multiple
         />
-        <Row direction="row" center>
-          <Text
-            text="Drag files here or"
-            color="grey"
-            size="small"
-            bold="bold"
-          />
-          <Text
-            text="browse"
-            color="blue"
-            size="small"
-            bold="bold"
-            margin="left"
-          />
+        <Row direction="column" center>
+          <Column>
+            <Icon
+              icon="dropbox"
+              theme="blue"
+              size="large"
+            />
+          </Column>
+          <Row direction="row" center>
+            <Text
+              text="Drag files here or"
+              color="grey"
+              size="small"
+              bold="bold"
+            />
+            <Text
+              text="browse"
+              color="blue"
+              size="small"
+              bold="bold"
+              margin="left"
+            />
+          </Row>
         </Row>
       </label>
     </div>

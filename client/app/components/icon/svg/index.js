@@ -5,6 +5,7 @@ import word from './word.svg';
 import failure from './failure.svg';
 import cancel from './cancel.svg';
 import done from './done.svg';
+import dropbox from './dropbox.svg';
 
 export {
   excel,
@@ -14,4 +15,5 @@ export {
   failure,
   cancel,
   done,
+  dropbox,
 };

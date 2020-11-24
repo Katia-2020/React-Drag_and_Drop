@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: rgba(221, 232, 253, 0.644);
+  background-color: rgb(200, 213, 236);
 }
 
 .drop-drag {
@@ -21,9 +21,6 @@ body {
   }
 
   &__body {
-    >:not(:last-of-type) {
-      margin-bottom: 20px;
-    }
     padding-left: 5px;
     padding-right: 5px;
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import Text from './components/text';
 import DropBox from './components/drop-box';
 import InputFiles from './components/input-files';
+import mimeTypes from './components/input-files/input-files.utilities';
 import styles from './reset.scss';
 
 class App extends React.Component {
@@ -60,11 +61,18 @@ class App extends React.Component {
   render() {
     // console.log(this.state);
     const { files } = this.state;
+    const extensions = (Object.values(mimeTypes)).join(', ');
+    console.log(extensions);
 
     return (
       <div className={styles['drop-drag']}>
         <div className={styles['drop-drag__header']}>
-          <Text text="Upload" size="medium" color="blue" bold="bold" />
+          <Text text="Upload you files" size="medium" color="blue" bold="bold" />
+          <Text text={`File should be ${extensions}`} size="xsmall" color="light-grey" bold="light" />
+        </div>
+
+        <div className={styles['drop-drag__box']}>
+          <DropBox onChange={this.handleOnChange} />
         </div>
 
         <div className={styles['drop-drag__body']}>
@@ -76,9 +84,6 @@ class App extends React.Component {
           />
         </div>
 
-        <div className={styles['drop-drag__footer']}>
-          <DropBox onChange={this.handleOnChange} />
-        </div>
       </div>
     );
   }

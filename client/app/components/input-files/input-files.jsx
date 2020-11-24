@@ -1,13 +1,7 @@
 import React from 'react';
 import File from '../file';
 import styles from './input-files.scss';
-
-const mimeTypes = {
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'word',
-  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'excel',
-  'application/pdf': 'pdf',
-  'image/jpeg': 'jpeg',
-};
+import mimeTypes from './input-files.utilities';
 
 const InputFiles = (props) => {
   const {
