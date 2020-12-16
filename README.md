@@ -9,7 +9,7 @@ React, JavaScript, Async promises, Lifecycle events, TDD testing (Jest), GitHub 
 
 ### Demo:
 
-1. Getting started
+1.Getting started
 
 ![dropbox-1](https://user-images.githubusercontent.com/66952678/100901804-28ec4180-34bc-11eb-8ca6-f10875bc832e.gif)
 
