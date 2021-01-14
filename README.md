@@ -2,7 +2,7 @@
 
 ### Description:
 The user has an option either to drag files to the box or choose them from the computer. The app supports certain mime types if the mime type of a file is not supported,
-the user is notified. The supported files are converted into base64. Once files are uploaded and converted, the user has an option to delete them.
+the user is notified. The supported files are converted into base64. Once files are uploaded and converted, the user has an option to delete them
 
 ### Technologies:
 React, JavaScript, Async promises, Lifecycle events, TDD testing (Jest), GitHub branches, SVG, SCSS and CSS modules, Webpack, Babel, Eslint, Stylelint.
